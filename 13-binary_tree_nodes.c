@@ -55,7 +55,7 @@ void count_node(const binary_tree_t *node, size_t *node_counter)
 * number of non-leaves nodes = total number of nodes - number of leaves
 * @tree: Pointer to the binary tree.
 *
-* Return: number of leaves, or 0 if tree is NULL.
+* Return: number of non-leave node, or 0 if tree is NULL.
 */
 size_t binary_tree_nodes(const binary_tree_t *tree)
 {
