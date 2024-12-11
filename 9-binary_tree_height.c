@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-
 /**
 * calculate_height - measures the height from a node in a binary tree
 * Description: Recursively traverses until the leave, then back to the root
@@ -21,11 +20,8 @@ size_t calculate_height(const binary_tree_t *tree)
 	}
 
 	/* recursive call on each branch (left & right )*/
-	/* check if we are on a single leave (return 0) */
 	left_height = calculate_height(tree->left);
-
 	right_height = calculate_height(tree->right);
-
 
 	/* Find the max "len" between left and right subbranche */
 	if (left_height >= right_height)
@@ -50,13 +46,19 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	/* declare and initialize variable */
 	size_t height = 0;
 
+	/* Check special case */
+	if (tree == NULL)
+	{
+		return (0);
+	}
+
 	/* check special case when only one node height = 0;*/
 	if ((tree->left == NULL) && (tree->right == NULL))
 		return (0);
+
 
 	/* calculate height and retrieve 1 (cause start at 0 )*/
 	height = (calculate_height(tree) - 1);
 
 	return (height);
-
 }
