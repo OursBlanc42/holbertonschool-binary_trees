@@ -50,6 +50,10 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	/* declare and initialize variable */
 	size_t height = 0;
 
+	/* check special case when only one node height = 0;*/
+	if ((tree->left == NULL) && (tree->right == NULL))
+		return (0);
+
 	/* calculate height and retrieve 1 (cause start at 0 )*/
 	height = (calculate_height(tree) - 1);
 
