@@ -24,8 +24,8 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 
 	/* Fill with data and make the link */
 	newnode->n = value;
-	new_node->left = NULL;	/* initialize */
-	new_node->right = NULL;	/* initialize */
+	newnode->left = NULL;	/* initialize */
+	newnode->right = NULL;	/* initialize */
 
 	if (parent->right != NULL)
 	{
