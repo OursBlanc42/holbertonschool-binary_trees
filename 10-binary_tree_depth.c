@@ -7,13 +7,15 @@
  */
 size_t binary_tree_depth(const binary_tree_t *tree)
 {
-	size_t depth;
-	depth = 0;
+	/* declare and initialize variable */
+	size_t depth = 0;
 
+	/* check special case */
 	if (tree == NULL)
 		return (0);
 
-	while(tree->parent != NULL)
+	/* recursively call */
+	while (tree->parent != NULL)
 	{
 		depth++;
 		tree = tree->parent;
