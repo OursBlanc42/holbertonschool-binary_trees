@@ -8,26 +8,33 @@
  */
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 {
+	/* Declare and initialize variable */
 	binary_tree_t *newnode;
 
+	/* Check special case */
+	if (parent == NULL)
+		return (NULL);
+
+	/* Initialize a new node*/
 	newnode = malloc(sizeof(binary_tree_t));
 
+	/* Check for memory allocation failure */
 	if (newnode == NULL)
 		return (NULL);
 
+	/* Fill with data and make the link */
 	newnode->n = value;
 	newnode->parent = parent;
-	if (parent == NULL)
-	{
-	return (NULL);
-	}
 
 	if (parent->right != NULL)
 	{
-	newnode->right = parent->right;
-	parent->right->parent = newnode;
+		newnode->right = parent->right;
+		parent->right->parent = newnode;
 	}
 
-parent->right = newnode;
+	/* link the node */
+	parent->right = newnode;
+	newnode->parent = parent;
+
 return (newnode);
 }
