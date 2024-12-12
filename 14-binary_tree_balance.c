@@ -1,29 +1,32 @@
-#include <stdlib.h>
 #include "binary_trees.h"
 /**
-* height_calculation - count the height of a tree
-* Description : calculate the height by traversing each branch
-* keep a track of height and update it at each level
-* @node: is a pointer to a node of the tree
-* Return: NULL if tree is empty or size of tree
+* binary_tree_height - measures the height of a binary tree
+* Description: Call the subfunction "calculate_height" to retrieve height
+* and substract 1 (cause height start at 0 in exemple )
+* @tree: is a pointer to the root node of the tree to measure the height.
+* Return: height of the node or 0 if tree is NULL or 1 leave
 */
-int height_calculation(const binary_tree_t *node)
+size_t binary_tree_height(const binary_tree_t *tree)
 {
+	/* declare and initialize variable */
+	size_t left_height = 0;
+	size_t right_height = 0;
 
-	int left_height;
-	int right_height;
-
-	/* If we reach NULL it's the end */
-	if (node == NULL)
+	/* Check special case */
+	if (tree == NULL)
 	{
 		return (0);
 	}
 
-	/* recursively catch each node */
-	left_height = height_calculation(node->left);
-	right_height = height_calculation(node->right);
+	/* check special case when only one node height = 0;*/
+	if ((tree->left == NULL) && (tree->right == NULL))
+		return (0);
 
-	/* find the maximum between two value */
+	/* recursive call on each branch (left & right )*/
+	left_height = binary_tree_height(tree->left);
+	right_height = binary_tree_height(tree->right);
+
+	/* Find the max "len" between left and right subbranche */
 	if (left_height >= right_height)
 	{
 		return (left_height + 1);
@@ -33,24 +36,6 @@ int height_calculation(const binary_tree_t *node)
 		return (right_height + 1);
 	}
 
-}
-
-/**
-* binary_tree_height - measures the height of a binary tree
-* @tree: is a pointer to the root node of the tree to measure the height.
-* Return: Size of the tree of 0 if tree is NULL
-*/
-size_t binary_tree_height(const binary_tree_t *tree)
-{
-
-	/* Check special case */
-	if (tree == NULL)
-	{
-		return (0);
-	}
-
-	/* call recursive function & return result (-1 to convert len to index) */
-	return ((size_t)height_calculation(tree)-1);
 }
 int binary_tree_balance(const binary_tree_t *tree)
 {
