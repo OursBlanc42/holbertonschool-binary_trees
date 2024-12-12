@@ -6,13 +6,14 @@
 * Description : calculate the height by traversing each branch
 * keep a track of height and update it at each level
 * @node: is a pointer to a node of the tree
-* @L_height: is a counter to count each branch on left
-* @R_height: is a counter to count each branch on right
 * Return: NULL if tree is empty or size of tree
 */
-int height_calculation(const binary_tree_t *node,
-int *L_height, int *R_height)
+int height_calculation(const binary_tree_t *node)
 {
+
+	int left_height;
+	int right_height;
+
 	/* If we reach NULL it's the end */
 	if (node == NULL)
 	{
@@ -20,17 +21,17 @@ int *L_height, int *R_height)
 	}
 
 	/* recursively catch each node */
-	*L_height = height_calculation(node->left, L_height, R_height);
-	*R_height = height_calculation(node->right, L_height, R_height);
+	left_height = height_calculation(node->left);
+	right_height = height_calculation(node->right);
 
 	/* find the maximum between two value */
-	if (*L_height >= *R_height)
+	if (left_height >= right_height)
 	{
-		return (*L_height + 1);
+		return (left_height + 1);
 	}
 	else
 	{
-		return (*R_height + 1);
+		return (right_height + 1);
 	}
 
 }
@@ -42,10 +43,6 @@ int *L_height, int *R_height)
 */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	/* declare variable */
-	int L_height = 0;
-	int R_height = 0;
-	int height = 0;
 
 	/* Check special case */
 	if (tree == NULL)
@@ -54,6 +51,5 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	}
 
 	/* call recursive function & return result (-1 to convert len to index) */
-	height = (height_calculation(tree, &L_height, &R_height)) - 1;
-	return ((size_t)height);
+	return ((size_t)height_calculation(tree)-1);
 }
